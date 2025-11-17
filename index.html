@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>alessio chen 完整页面框架</title>
+    
+    <style>
+        /* * 1. 全局和基础重置
+         --------------------------------------------*/
+        * {
+            box-sizing: border-box;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            /* 默认是浅色主题 */
+            background-color: #fff;
+            color: #000;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* 统一的分割线 */
+        .divider-line {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .dark-theme .divider-line {
+            border-color: #333; /* 深色主题下的分割线 */
+        }
+        
+        /* 科技感的等宽字体 (用于 "shop" 标签) */
+        .monospace-font {
+            font-family: 'Menlo', 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        /* * 2. 主题切换 (核心)
+         --------------------------------------------*/
+        .dark-theme {
+            background-color: #000;
+            color: #fff;
+        }
+        .dark-theme a {
+            color: #fff;
+        }
+        .light-theme {
+            background-color: #fff;
+            color: #000;
+        }
+        .light-theme a {
+            color: #000;
+        }
+
+        /* * 3. 网站总头部 (固定)
+         --------------------------------------------*/
+        .site-header-sticky {
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* 顶部标准导航 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        .top-nav .nav-left,
+        .top-nav .nav-right {
+            display: flex;
+            gap: 15px;
+            flex: 1;
+        }
+        .top-nav .nav-right {
+            justify-content: flex-end;
+        }
+        .top-nav .logo {
+            flex: 1;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* 滚动公告栏 */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            padding: 8px 0;
+        }
+        .marquee-content {
+            display: flex;
+            width: max-content;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            animation: scroll-left 20s linear infinite;
+        }
+        .marquee-container:hover .marquee-content {
+            animation-play-state: paused;
+        }
+        .marquee-content li {
+            white-space: nowrap;
+            padding: 0 25px;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+        .marquee-content li a {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        /* 动画关键帧 */
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* * 4. 页面主内容区
+         --------------------------------------------*/
+        .main-content {
+            width: 100%;
+        }
+
+        /* 4.1 Hero Banner (深色) */
+        .hero-section {
+            width: 100%;
+            height: 90vh; /* 模拟全屏 Banner */
+            position: relative;
+            /* 图片占位符 */
+            background-color: #111;
+            background-image: url('https://www.alexanderwang.com/dw/image/v2/BCCC_PRD/on/demandware.static/-/Library-Sites-alexander-wang/default/dwa6dd67f3/new-arrivals_desktop.jpg?sw=2000&sh=2000&sm=fit'); /* 你可以替换成真实图片链接 */
+            background-size: cover;
+            background-position: center;
+        }
+        .hero-section .label-tag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 14px;
+        }
+        .hero-section .label-tag span {
+            font-weight: bold;
+        }
+
+        /* 4.2 产品网格 */
+        .product-grid-wrapper {
+            width: 100%;
+            padding: 20px 0 0 0;
+        }
+        
+        .product-grid-wrapper.light-theme {
+            padding: 40px 0;
+        }
+
+        .product-grid-header {
+            padding: 0 20px 20px 20px;
+            font-size: 14px;
+        }
+        .product-grid-header span {
+            font-weight: bold;
+        }
+
+        .product-grid {
+            display: flex;
+            width: 100%;
+        }
+        
+        /* 网格内的单个面板 */
+        .grid-panel {
+            flex: 1; /* 均分 */
+            position: relative;
+            height: 80vh; /* 模拟高度 */
+            
+            /* 图片占位符 */
+            background-color: #222; /* 深色占位 */
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .light-theme .grid-panel {
+            background-color: #f0f0f0; /* 浅色占位 */
+            height: 60vh;
+        }
+
+        /* 2栏布局的分割线 */
+        .columns-2 .grid-panel + .grid-panel {
+            border-left: 1px solid #333;
+        }
+        
+        /* 4栏布局不需要分割线 */
+        
+        /* 2栏布局的标签 */
+        .grid-panel .label-tag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 14px;
+        }
+        .grid-panel .label-tag span {
+            font-weight: bold;
+        }
+
+        /* 4.3 底部文字块 (浅色) */
+        .text-block-section {
+            padding: 40px 20px;
+        }
+        .text-block-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .text-block-content a {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+
+        /* * 5. 网站页脚 (浅色)
+         --------------------------------------------*/
+        .site-footer {
+            width: 100%;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* 5.1 四栏布局 */
+        .footer-columns {
+            display: flex;
+            width: 100%;
+        }
+        .footer-column {
+            flex: 1;
+            padding: 30px;
+            border-right: 1px solid #e0e0e0;
+        }
+        .footer-column:last-child {
+            border-right: none;
+        }
+        .footer-column h3 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-transform: lowercase; /* 模拟 "newsletter" 小写 */
+        }
+        .footer-column h3.uppercase {
+             text-transform: uppercase; /* 截图中的 "azienda" 是大写 */
+        }
+
+        /* 5.2 链接列表 */
+        .footer-column ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+        .footer-column a {
+            font-size: 13px;
+            text-transform: lowercase;
+            transition: opacity 0.3s;
+        }
+        .footer-column a.bold {
+            font-weight: bold;
+        }
+        .footer-column a:hover {
+            opacity: 0.6;
+        }
+        .footer-column a.cookie-link {
+            text-transform: none;
+        }
+
+        /* 5.3 表单样式 */
+        .newsletter-form p {
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .form-input {
+            width: 100%;
+            background-color: #f5f5f5;
+            border: none;
+            padding: 12px 15px;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+        .form-input::placeholder { color: #888; }
+        
+        .form-input-group {
+            display: flex;
+            background-color: #f5f5f5;
+            margin-bottom: 10px;
+        }
+        .country-code {
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            font-size: 13px;
+            border-right: 1px solid #e0e0e0;
+            white-space: nowrap;
+        }
+        .country-code span:first-child {
+            text-transform: uppercase;
+            margin-right: 8px;
+        }
+        .form-input-group input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 12px 15px;
+            font-size: 13px;
+            min-width: 50px;
+        }
+        .form-input-group input:focus, .form-input:focus {
+            outline: none;
+        }
+        .form-checkbox-group {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            text-transform: lowercase;
+        }
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        .submit-button {
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #000;
+            padding: 12px;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: lowercase;
+        }
+        .submit-button:hover {
+            background-color: #000;
+            color: #fff;
+        }
+        .form-terms {
+            font-size: 11px;
+            color: #666;
+            margin-top: 15px;
+        }
+        .form-terms input[type="checkbox"] {
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        .form-terms a {
+            font-size: 11px;
+            text-decoration: underline;
+        }
+
+        /* 5.4 配送国 */
+        .footer-meta {
+            padding: 20px 30px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* 5.5 版权 */
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .footer-bottom .copyright {
+            font-size: 13px;
+        }
+        .footer-bottom .social {
+            display: flex;
+            gap: 15px;
+        }
+        .footer-bottom .social a {
+            font-size: 13px;
+            text-transform: lowercase;
+        }
+        .footer-bottom .social a:hover {
+            opacity: 0.6;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="site-header-sticky dark-theme">
+
+        <nav class="top-nav">
+            <div class="nav-left">
+                <a href="#">new arrivals</a>
+                <a href="#">donna</a>
+                <a href="#">uomo</a>
+                <a href="#">cerca</a>
+            </div>
+            <div class="logo">
+                <a href="#">alessiochen</a>
+            </div>
+            <div class="nav-right">
+                <a href="#">ⓘ</a> <a href="#">👤</a> <a href="#">👜</a> </div>
+        </nav>
+
+        <div class="divider-line"></div>
+
+        <div class="marquee-container">
+            <ul class="marquee-content">
+                <li>fino al 50% di sconto</li>
+                <li><a href="#">acquista saldi</a></li>
+                <li>fino al 50% di sconto</li>
+                <li><a href="#">acquista saldi</a></li>
+                <li>fino al 50% di sconto</li>
+                
+                <li>fino al 50% di sconto</li>
+                <li><a href="#">acquista saldi</a></li>
+                <li>fino al 50% di sconto</li>
+                <li><a href="#">acquista saldi</a></li>
+                <li>fino al 50% di sconto</li>
+            </ul>
+        </div>
+        
+        <div class="divider-line"></div>
+
+    </header>
+
+    <main class="main-content">
+
+        <section class="hero-section dark-theme">
+            <div class="label-tag monospace-font">
+                <span>shop</span> new arrivals
+            </div>
+        </section>
+
+        <section class="product-grid-wrapper dark-theme">
+            <div class="product-grid columns-2">
+                <div class="grid-panel">
+                    <div class="label-tag monospace-font">
+                        <span>shop</span> outerwear
+                    </div>
+                </div>
+                <div class="grid-panel">
+                    <div class="label-tag monospace-font">
+                        <span>shop</span> sets
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="product-grid-wrapper light-theme">
+            <div class="product-grid-header monospace-font">
+                <span>shop</span> recommendations
+            </div>
+            <div class="product-grid columns-4">
+                <div class="grid-panel">
+                    </div>
+                <div class="grid-panel">
+                    </div>
+                <div class="grid-panel">
+                    </div>
+                <div class="grid-panel">
+                    </div>
+            </div>
+        </section>
+
+        <section class="text-block-section light-theme">
+            <p class="text-block-content">
+                Entra nel mondo di a le ssi o, dove la moda contemporanea incontra lo stile streetwear nella sua forma più elegante. I nostri capi di abbigliamento e accessori firmati sfidano le tendenze e ridefiniscono il concetto di lusso con linee audaci e d'effetto. <a href="#">Continua a leggere</a>
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="site-footer light-theme">
+
+        <div class="footer-columns">
+            
+            <div class="footer-column">
+                <form action="#" class="newsletter-form">
+                    <h3>newsletter</h3>
+                    <p>non perderti nulla e iscriviti alla nostra newsletter: ti invieremo solo le migliori offerte, promesso.</p>
+                    
+                    <div class="form-checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="gender" value="donna">
+                            <span>donna</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="gender" value="uomo">
+                            <span>uomo</span>
+                        </label>
+                    </div>
+
+                    <input type="email" placeholder="inserisci indirizzo e-mail" class="form-input">
+                    
+                    <div class="form-input-group">
+                        <div class="country-code">
+                            <span>ITA</span>
+                            <span>+39</span>
+                        </div>
+                        <input type="tel" placeholder="numero di telefono">
+                    </div>
+
+                    <label class="form-terms">
+                        <input type="checkbox" name="terms">
+                        <span>acconsento al trattamento dei miei dati personali in base all'<a href="#">informativa sulla privacy</a>.</span>
+                    </label>
+
+                    <button type="submit" class="submit-button">iscriviti</button>
+                </form>
+            </div>
+
+            <div class="footer-column">
+                <h3>contatti</h3>
+                <ul>
+                    <li><a href="#">call</a></li>
+                    <li><a href="#">invia un messaggio</a></li>
+                    <li><a href="#">chat</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>assistenza clienti</h3>
+                <ul>
+                    <li><a href="#">faq</a></li>
+                    <li><a href="#">product info</a></li>
+                    <li><a href="#">payment</a></li>
+                    <li><a href="#">shipping and returns</a></li>
+                    <li><a href="#">boutique</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3 class="uppercase">azienda</h3>
+                <ul>
+                    <li><a href="#" class="cookie-link">Cookie 设置 222222</a></li>
+                    <li><a href="#" class="bold">privacy policy</a></li>
+                    <li><a href="#">terms of use</a></li>
+                    <li><a href="#">careers</a></li>
+                    <li><a href="#">accessibility</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-meta">
+            <span>spedire in: Italia, lingua: italiano</span>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="copyright">
+                <span>© 2025 alessio chen.</span>
+            </div>
+            <div class="social">
+                <a href="#">instagram</a>
+                <a href="#">tiktok</a>
+            </div>
+        </div>
+
+    </footer>
+
+</body>
+</html>
