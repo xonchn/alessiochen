@@ -1,0 +1,269 @@
+
+
+* {
+            box-sizing: border-box;
+        }
+        @font-face {
+    font-family: 'Helvetica Neue';  /* 我们给它起个统一的名字 */
+    src: url('fonts/Helvetica-Neue.ttf') format('truetype');
+    font-weight: 400; /* 设定这个文件对应“常规”粗细 */
+    font-style: normal;
+}
+@font-face {
+    font-family: 'BrandFont';
+    /* 注意：这里的文件名必须和你下载的一模一样 */
+    src: url('fonts/Inter/static/Inter_18pt-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* --- 2. 标题粗体 (对应 Inter_18pt-Bold.ttf) --- */
+@font-face {
+    font-family: 'BrandFont';
+    src: url('fonts/Inter/static/Inter_18pt-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* --- 3. 品牌特粗 (对应 Inter_18pt-Black.ttf) --- */
+@font-face {
+    font-family: 'BrandFont';
+    src: url('fonts/Inter/static/Inter_18pt-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            /* 默认是浅色主题 */
+            background-color: #fff;
+            color: #000;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* 统一的分割线 */
+        .divider-line {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .dark-theme .divider-line {
+            border-color: #333; /* 深色主题下的分割线 */
+        }
+        
+        /* 科技感的等宽字体 (用于 "shop" 标签) */
+        .monospace-font {
+            font-family: 'Menlo', 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        /* * 2. 主题切换 (核心)
+         --------------------------------------------*/
+        .dark-theme {
+            background-color: #000;
+            color: #fff;
+        }
+        .dark-theme a {
+            color: #fff;
+        }
+        .light-theme {
+            background-color: #fff;
+            color: #000;
+        }
+        .light-theme a {
+            color: #000;
+        }
+
+        /* * 3. 网站总头部 (固定)
+         --------------------------------------------*/
+        .site-header-sticky {
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* 顶部标准导航 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        .top-nav .nav-left,
+        .top-nav .nav-right {
+            display: flex;
+            gap: 15px;
+            flex: 1;
+        }
+        .top-nav .nav-right {
+            justify-content: flex-end;
+        }
+        .top-nav .logo {
+            flex: 1;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* 滚动公告栏 */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            padding: 8px 0;
+        }
+        .marquee-content {
+            display: flex;
+            width: max-content;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            animation: scroll-left 20s linear infinite;
+        }
+        .marquee-container:hover .marquee-content {
+            animation-play-state: paused;
+        }
+        .marquee-content li {
+            white-space: nowrap;
+            padding: 0 25px;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+        .marquee-content li a {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        /* 动画关键帧 */
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* * 4. 页面主内容区
+         --------------------------------------------*/
+        .main-content {
+            width: 100%;
+        }
+
+        /* 4.1 Hero Banner (深色) */
+        .hero-section {
+            width: 100%;
+            height: 90vh; /* 模拟全屏 Banner */
+            position: relative;
+            /* 图片占位符 */
+            background-color: #111;
+            background-image: url('../imgs/new-arrivals_desktop.jpg'); /* 你可以替换成真实图片链接 */
+            background-size: cover;
+            background-position: center;
+        }
+        .hero-section .label-tag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 14px;
+        }
+        .hero-section .label-tag span {
+            font-weight: bold;
+        }
+
+        /* 4.2 产品网格 */
+        .product-grid-wrapper {
+            width: 100%;
+            padding: 20px 0 0 0;
+        }
+        
+        .product-grid-wrapper.light-theme {
+            padding: 40px 0;
+        }
+
+        .product-grid-header {
+            padding: 0 20px 20px 20px;
+            font-size: 14px;
+        }
+        .product-grid-header span {
+            font-weight: bold;
+        }
+
+        .product-grid {
+            display: flex;
+            width: 100%;
+        }
+        
+        /* 网格内的单个面板 */
+        .grid-panel {
+            flex: 1; /* 均分 */
+            position: relative;
+            height: 120vh; /* 模拟高度 */
+            
+            /* 图片占位符 */
+            background-color: #222; /* 深色占位 */
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .light-theme .grid-panel {
+            background-color: #f0f0f0; /* 浅色占位 */
+            height: 60vh;
+        }
+
+        /* 2栏布局的分割线 */
+        .columns-2 .grid-panel + .grid-panel {
+            border-left: 1px solid #333;
+        }
+        
+        /* 4栏布局不需要分割线 */
+        
+        /* 2栏布局的标签 */
+        .grid-panel .label-tag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 14px;
+        }
+        .grid-panel .label-tag span {
+            font-weight: bold;
+        }
+
+        /* 4.3 底部文字块 (浅色) */
+        .text-block-section {
+            padding: 40px 20px;
+        }
+        .text-block-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .text-block-content a {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+
+  
+        
+        p {
+            margin-bottom: 20px;
+            display: inline; /* 强制行内显示，以便按钮跟随 */
+        }
+
+        /* 当处于展开状态时，隐藏“展开”按钮 */
+        .is-expanded .expand-trigger {
+            display: none;
+        }
+        
+        /* 块级包裹，用于换行 */
+        .block-wrapper {
+            display: block;
+            margin-bottom: 15px;
+        }

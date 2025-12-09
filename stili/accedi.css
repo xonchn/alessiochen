@@ -1,0 +1,320 @@
+/* --- 全局样式重置 --- */
+@font-face {
+    font-family: 'Helvetica Neue';  /* 我们给它起个统一的名字 */
+    src: url('fonts/Helvetica-Neue.ttf') format('truetype');
+    font-weight: 400; /* 设定这个文件对应“常规”粗细 */
+    font-style: normal;
+}
+@font-face {
+    font-family: 'BrandFont';
+    /* 注意：这里的文件名必须和你下载的一模一样 */
+    src: url('fonts/Inter/static/Inter_18pt-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* --- 2. 标题粗体 (对应 Inter_18pt-Bold.ttf) --- */
+@font-face {
+    font-family: 'BrandFont';
+    src: url('fonts/Inter/static/Inter_18pt-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* --- 3. 品牌特粗 (对应 Inter_18pt-Black.ttf) --- */
+@font-face {
+    font-family: 'BrandFont';
+    src: url('fonts/Inter/static/Inter_18pt-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Helvetica,'BrandFont' Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            background-color: #fff;
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* 强制所有文本小写，符合品牌调性 */
+        body, button, input, a {
+            text-transform: lowercase;
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- 布局工具类 --- */
+        .container {
+            width: 100%;
+            padding: 0 40px;
+        }
+
+        /* --- Header --- */
+        header {
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 18px;
+            letter-spacing: -0.5px;
+        }
+
+        .cart {
+            font-weight: 700;
+        }
+
+        /* --- Main Content --- */
+        main {
+            display: flex;
+            margin-top: 120px; /* Header height + spacing */
+            flex: 1;
+        }
+
+        /* --- Sidebar (Left) --- */
+        .sidebar {
+            width: 25%;
+            padding-right: 20px;
+        }
+
+        .sidebar h2 {
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar a.active {
+            text-decoration: underline;
+        }
+
+        /* --- Content (Right) --- */
+        .content {
+            width: 40%; /* 控制表单区域宽度 */
+            max-width: 450px;
+        }
+
+        .welcome-text {
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        /* --- Forms & Inputs --- */
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            background-color: #f0f0f0; /* 灰色背景 */
+            border: none;
+            outline: none;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        input::placeholder {
+            color: #666;
+        }
+
+        /* 密码框眼睛图标 */
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            border: 1px solid #000;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: inherit;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        .btn:hover svg path {
+            fill: #fff;
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: right;
+            margin-bottom: 30px;
+            font-size: 12px;
+            color: #555;
+        }
+
+        /* --- Divider (Oppure) --- */
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 30px 0;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .divider::before {
+            margin-right: 15px;
+        }
+
+        .divider::after {
+            margin-left: 15px;
+        }
+
+        /* --- Social Login Buttons --- */
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* 居中 */
+            position: relative;
+        }
+
+        .social-btn svg {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: 20px;
+        }
+
+        /* --- Registration Section --- */
+        .register-section {
+            margin-top: 60px;
+        }
+
+        .register-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .register-section p {
+            font-size: 13px;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            max-width: 90%;
+        }
+
+        /* --- Footer --- */
+        footer {
+            margin-top: 100px;
+            padding: 40px;
+            border-top: 1px solid transparent; 
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .footer-left {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 20px;
+        }
+
+        .copyright {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            font-weight: 600;
+        }
+        
+        /* 为了布局，稍微调整copyright位置 */
+        .footer-bottom-row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        /* --- 响应式调整 (Mobile) --- */
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            main { flex-direction: column; margin-top: 80px; }
+            
+            .sidebar {
+                width: 100%;
+                margin-bottom: 40px;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 20px;
+            }
+
+            .content { width: 100%; max-width: 100%; }
+
+            footer {
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+                align-items: flex-start;
+            }
+            
+            .footer-bottom-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .copyright {
+                position: static;
+                margin-top: 20px;
+            }
+        }

@@ -1,0 +1,183 @@
+@font-face {
+    font-family: 'Helvetica Neue';  /* 我们给它起个统一的名字 */
+    src: url('fonts/Helvetica-Neue.ttf') format('truetype');
+    font-weight: 400; /* 设定这个文件对应“常规”粗细 */
+    font-style: normal;
+}
+@font-face {
+    font-family: 'BrandFont';
+    /* 注意：这里的文件名必须和你下载的一模一样 */
+    src: url('fonts/Inter/static/Inter_18pt-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* --- 2. 标题粗体 (对应 Inter_18pt-Bold.ttf) --- */
+@font-face {
+    font-family: 'BrandFont';
+    src: url('fonts/Inter/static/Inter_18pt-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* --- 3. 品牌特粗 (对应 Inter_18pt-Black.ttf) --- */
+@font-face {
+    font-family: 'BrandFont';
+    src: url('fonts/Inter/static/Inter_18pt-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+        /* --- 全局样式重置 (沿用之前的风格) --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Helvetica,'BrandFont', Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            background-color: #fff;
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            /* 强制所有文本小写 */
+            text-transform: lowercase;
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* --- Header (沿用) --- */
+        header {
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            z-index: 100;
+            padding: 0 40px;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 18px;
+            letter-spacing: -0.5px;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 20px;
+            font-weight: 700;
+        }
+
+        /* --- Main 404 Content --- */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 40px;
+            margin-top: 80px; /* Header height */
+        }
+
+        /* 巨大的故障艺术风格 404 标题 */
+        .error-code {
+            font-size: 180px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            position: relative;
+            letter-spacing: -10px;
+        }
+
+        /* 简单的 CSS 故障效果 */
+        .error-code::before,
+        .error-code::after {
+            content: '404';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+        }
+
+        .error-code::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00c1;
+            clip-path: inset(20% 0 30% 0);
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+
+        .error-code::after {
+            left: -2px;
+            text-shadow: -2px 0 #00fff9;
+            clip-path: inset(40% 0 40% 0);
+            animation: glitch-anim-2 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip-path: inset(20% 0 30% 0); }
+            100% { clip-path: inset(10% 0 60% 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip-path: inset(40% 0 40% 0); }
+            100% { clip-path: inset(80% 0 5% 0); }
+        }
+
+        .error-message {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .error-subtext {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 400px;
+        }
+
+        /* --- Button Style (沿用登录页风格) --- */
+        .btn {
+            padding: 15px 40px;
+            background: transparent;
+            border: 1px solid #000;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: inherit;
+            display: inline-block;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        /* --- Footer (简化版) --- */
+        footer {
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* --- 响应式 --- */
+        @media (max-width: 768px) {
+            header { padding: 0 20px; }
+            .error-code { font-size: 120px; }
+            .header-right { gap: 15px; font-size: 12px;}
+        }
